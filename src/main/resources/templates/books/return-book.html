@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Return a book</title>
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+
+
+</head>
+<body>
+
+
+<table>
+    <tr>
+        <th>Loan ID</th>
+        <th>LoanDate</th>
+        <th>Userid</th>
+
+    </tr>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}">ID</td>
+        <td th:text="${book.LoanDate}">LoanDate</td>
+        <td th:text="${book.userid}">Userid</td>
+
+    </tr>
+
+    </tr>
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form method="get" action="/welcome">
+    <button type="submit">Cancel</button>
+</form>
+
+</body>
+</html>
