@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <title>Book Directory</title>
 </head>
@@ -20,48 +21,29 @@
     <hr>
 
 
-
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
             <th>Book Name</th>
-            <th>Book Summary</th>
-            <th>ISBN</th>
-            <th>Copies Purchased</th>
-            <th>Copies for loan</th>
+            <th>Available for loan</th>
+            <th>Loan to</th>
+            <th>Action</th>
         </tr>
         </thead>
 
         <tbody>
         <tr th:each=" tempBook : ${books}">
+        <tr th:each=" tempUser : ${users}">
 
-            <td th:text="${tempBook.name}" />
-            <td th:text="${tempBook.summary}" />
-            <td th:text="${tempBook.ISBN}" />
-            <td th:text="${tempBook.copiesPurchased}" />
-            <td th:text="${tempBook.copiesAvailable}" />
-            </option>
+            <td th:text="${tempBook.name}"/>
+            <td th:text="${tempBook.copiesAvailable}"/>
+            <td><select class="form-control" th:field="${tempUser}" id="">
+                <option value="0">select user</option>
+                <option th:each=""></option>
+            </select>
+            </td>
             <td>
-                <select>
-                    <option th:each="tempUser : ${users}" th:value="${user.firstname}"
-                            th:attr="choiceid=${user.id}" th:text="${user.firstname}">
-
-                    </option>
-
-                </select>
-
-
-
-            <td>
-
-
-                </a>
-                <!-- Add "delete" button/link -->
-                <a th:href="@{/books/delete(bookId=${tempUser.id})}"
-                   class="btn btn-danger btn-sm"
-                   onclick="if (!(confirm('Are you sure you want to delete this book?'))) return false">
-                    Delete
-                </a>
+                <button type="submit" class="btn btn-info col-7">Accept Loan</button>
 
             </td>
 

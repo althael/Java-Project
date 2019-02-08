@@ -2,6 +2,7 @@ package com.persado.assignment.project.Controllers;
 
 import com.persado.assignment.project.Entities.Book;
 import com.persado.assignment.project.Services.BookServices.BookService;
+import com.persado.assignment.project.Services.UserServices.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +14,12 @@ import java.util.List;
 public class BookController {
 
     private BookService bookService;
+    private UserService userService;
 
     public BookController(BookService theBookService) {
         bookService = theBookService;
     }
+
 
     // add mapping for "/list"
 
@@ -48,6 +51,8 @@ public class BookController {
     @PostMapping("/saveBook")
     public String saveBook(@ModelAttribute("books") Book theBook) {
 
+        theBook.setCopiesAvailable(theBook.getCopiesPurchased());
+
         // save the book
         bookService.save(theBook);
 
@@ -70,11 +75,16 @@ public class BookController {
 
     @GetMapping("/loanBook")
         public String loanBook(Model theModel) {
+        // get books from db
+        List<Book> theBooks = bookService.findAll();
 
-        // create model attribute to bind form data
-        Book theBook = new Book();
 
-        theModel.addAttribute("books", theBook);
+
+
+        // add to the spring model
+        theModel.addAttribute("books", theBooks);
+
+
 
         return "/books/book-loan";
     }
@@ -82,12 +92,8 @@ public class BookController {
     @GetMapping("/returnBook")
     public String returnBook(Model theModel) {
 
-        // create model attribute to bind form data
-        Book theBook = new Book();
 
-        theModel.addAttribute("books", theBook);
-
-        return "/books/book-loan";
+        return "/books/book-return";
     }
 
 }
